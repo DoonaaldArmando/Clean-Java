@@ -2,8 +2,7 @@ package co.com.portabilidad.clases;
 
 
 import co.com.portabilidad.excepciones.ListadoExceptiones;
-import co.com.portabilidad.excepciones.StringNoVacio;
-import co.com.portabilidad.excepciones.ValorRequerido;
+import co.com.portabilidad.excepciones.mensajes.MensajesDireccion;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import lombok.Builder;
 
@@ -13,13 +12,6 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class Direccion {
 
-    private static final String CADENA_CARACTER_NULO = "La cadena caracter no puede ser nula";
-    private static final String CIUDAD_NULA = "La ciudad no puede ser nula";
-    private static final String CIUDAD_VACIA = "La ciudad no puede ser vacia";
-    private static final String DEPARTAMENTO_NULO = "El departamento no puede ser nulo";
-    private static final String DEPARTAMENTO_VACIO = "El departamento no puede estar vacio";
-    private static final String UBICACION_NULA = "La ubicacion no puede ser nula";
-    private static final String UBICACION_VACIA = "La ubicacion no puede ser vacia";
 
     private final String ciudad;
     private final String departamento;
@@ -38,37 +30,37 @@ public class Direccion {
         try {
 
             if (cadenaCaracter.cadenaNoVacia(ciudad)) {
-                listadoExcepciones.add(CIUDAD_VACIA);
+                listadoExcepciones.add(MensajesDireccion.CIUDAD_VACIA);
                 excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(ciudad)) {
-                listadoExcepciones.add(CIUDAD_NULA);
+                listadoExcepciones.add(MensajesDireccion.CIUDAD_NULA);
                 excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(departamento)) {
-                listadoExcepciones.add(DEPARTAMENTO_VACIO);
+                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_VACIO);
                 excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(departamento)) {
-                listadoExcepciones.add(DEPARTAMENTO_NULO);
+                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_NULO);
                 excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(ubicacion)) {
-                listadoExcepciones.add(UBICACION_VACIA);
+                listadoExcepciones.add(MensajesDireccion.UBICACION_VACIA);
                 excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(ubicacion)) {
-                listadoExcepciones.add(UBICACION_NULA);
+                listadoExcepciones.add(MensajesDireccion.UBICACION_NULA);
                 excepcionProducida = Boolean.TRUE;
             }
 
         } catch (Exception e) {
-            listadoExcepciones.add(CADENA_CARACTER_NULO);
+            listadoExcepciones.add(MensajesDireccion.CADENA_CARACTER_NULO);
         }
 
         if (excepcionProducida) {
