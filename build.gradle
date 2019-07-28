@@ -1,0 +1,58 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'co.com.portabilidad'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compile project(':dominio')
+    compile project(':dominio:modelo')
+    compile project(':dominio:casosDeUso')
+    compile project(':puertos')
+    compile project(':puertos:baseDeDatos')
+    compile project(':puertos:baseDeDatos:mongodb')
+    compile project(':puertos:baseDeDatos:H2')
+    compile project(':puertos:web')
+    compile project(':puertos:web:rest')
+
+}
+
+
+allprojects {
+
+    apply plugin: "java"
+
+    group = 'co.com.portabilidad'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        compileOnly 'org.projectlombok:lombok:1.18.8'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    }
+
+}

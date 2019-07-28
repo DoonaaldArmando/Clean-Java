@@ -1,0 +1,3 @@
+dependencies {
+    compile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
+}

@@ -1,0 +1,17 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+	}
+}
+rootProject.name = 'portabilidad'
+
+include 'dominio'
+include 'dominio:modelo'
+include 'dominio:casosDeUso'
+include 'puertos'
+include 'puertos:baseDeDatos'
+include 'puertos:baseDeDatos:mongodb'
+include 'puertos:baseDeDatos:H2'
+include 'puertos:web'
+include 'puertos:web:rest'
+
