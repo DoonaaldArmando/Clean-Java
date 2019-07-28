@@ -1,0 +1,9 @@
+package co.com.portabilidad.acciones.persona;
+
+import java.math.BigInteger;
+
+public interface ExistenciaPersona {
+
+    Boolean existenciaPersona(String tipoDocumento, BigInteger numeroCedula);
+
+}
