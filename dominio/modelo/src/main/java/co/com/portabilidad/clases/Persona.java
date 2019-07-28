@@ -1,21 +1,21 @@
 package co.com.portabilidad.clases;
 
-import co.com.portabilidad.excepciones.ListaNoVacia;
-import co.com.portabilidad.excepciones.NumeroNegativo;
-import co.com.portabilidad.excepciones.StringNoVacio;
-import co.com.portabilidad.excepciones.ValorRequerido;
+import co.com.portabilidad.excepciones.*;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import co.com.portabilidad.validaciones.Lista;
 import co.com.portabilidad.validaciones.Numero;
 import lombok.Builder;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Persona {
 
-    private static final String OBLIGATORIO_GENERICO = "Se deben suministrar las instancias de todos los validadores";
+    private static final String CADENA_CARACTER_NULO = "La cadena caracter no puede ser nula";
+    private static final String VALIDADOR_NUMERO_NULO = "El validador numero no puede ser nulo";
+    private static final String VALIDADOR_LISTA_NULO = "El validador de listas no puede ser nulo";
     private static final String NOMBRE_NULO = "El nombre no puede ser nulo";
     private static final String NOMBRE_VACIO = "El nombre no puede ser vacio";
     private static final String APELLIDO_NULO = "El apellido no puede ser nulo";
@@ -50,59 +50,93 @@ public class Persona {
             Lista validadorLista
     ) {
 
+        Boolean excepcionProducida = Boolean.FALSE;
+        List<String> listadoExcepciones = new <String>ArrayList();
+
         try {
 
             if (cadenaCaracter.cadenaNoVacia(nombre)) {
-                throw new StringNoVacio(NOMBRE_VACIO);
+                listadoExcepciones.add(NOMBRE_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(nombre)) {
-                throw new ValorRequerido(NOMBRE_NULO);
+                listadoExcepciones.add(NOMBRE_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(apellido)) {
-                throw new StringNoVacio(APELLIDO_VACIO);
+                listadoExcepciones.add(APELLIDO_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(apellido)) {
-                throw new ValorRequerido(APELLIDO_NULO);
+                listadoExcepciones.add(APELLIDO_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(tipoCedula)) {
-                throw new StringNoVacio(TIPO_CEDULA_VACIO);
+                listadoExcepciones.add(TIPO_CEDULA_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(tipoCedula)) {
-                throw new ValorRequerido(TIPO_CEDULA_NULO);
+                listadoExcepciones.add(TIPO_CEDULA_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
+        } catch (Exception e) {
+            listadoExcepciones.add(CADENA_CARACTER_NULO);
+            excepcionProducida = Boolean.TRUE;
+        }
+
+        try {
+
             if (validadorNumero.numeroNoNegativo(numeroCedula)) {
-                throw new NumeroNegativo(NUMERO_CEDULA_NEGATIVO);
+                listadoExcepciones.add(NUMERO_CEDULA_NEGATIVO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (validadorNumero.numeroNoNulo(numeroCedula)) {
-                throw new ValorRequerido(NUMERO_CEDULA_NULO);
+                listadoExcepciones.add(NUMERO_CEDULA_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
+        } catch (Exception e) {
+            listadoExcepciones.add(VALIDADOR_NUMERO_NULO);
+            excepcionProducida = Boolean.TRUE;
+        }
+
+
+        try {
+
             if (validadorLista.listaNoVacia(telefonos)) {
-                throw new ListaNoVacia(TELEFONO_VACIO);
+                listadoExcepciones.add(TELEFONO_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (validadorLista.listaNoNula(telefonos)) {
-                throw new ValorRequerido(TELEFONO_NULO);
+                listadoExcepciones.add(TELEFONO_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (validadorLista.listaNoVacia(direcciones)) {
-                throw new ListaNoVacia(DIRECCION_VACIA);
+                listadoExcepciones.add(DIRECCION_VACIA);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (validadorLista.listaNoNula(direcciones)) {
-                throw new ValorRequerido(DIRECCION_NULO);
+                listadoExcepciones.add(DIRECCION_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
-
         } catch (Exception e) {
-            throw new ValorRequerido(OBLIGATORIO_GENERICO);
+            listadoExcepciones.add(VALIDADOR_LISTA_NULO);
+            excepcionProducida = Boolean.TRUE;
+        }
+
+        if (excepcionProducida) {
+            throw new ListadoExceptiones(listadoExcepciones);
         }
 
         this.nombre = nombre;
@@ -188,7 +222,8 @@ public class Persona {
                     this.direcciones,
                     this.cadenaCaracter,
                     this.validadorNumero,
-                    this.validadorLista);
+                    this.validadorLista
+            );
         }
 
     }

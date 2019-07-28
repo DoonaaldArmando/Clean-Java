@@ -1,15 +1,19 @@
 package co.com.portabilidad.clases;
 
 
+import co.com.portabilidad.excepciones.ListadoExceptiones;
 import co.com.portabilidad.excepciones.StringNoVacio;
 import co.com.portabilidad.excepciones.ValorRequerido;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import lombok.Builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder(toBuilder = true)
 public class Direccion {
 
-    private static final String OBLIGATORIO_GENERICO = "Se deben suministrar las instancias de todos los validadores";
+    private static final String CADENA_CARACTER_NULO = "La cadena caracter no puede ser nula";
     private static final String CIUDAD_NULA = "La ciudad no puede ser nula";
     private static final String CIUDAD_VACIA = "La ciudad no puede ser vacia";
     private static final String DEPARTAMENTO_NULO = "El departamento no puede ser nulo";
@@ -21,7 +25,6 @@ public class Direccion {
     private final String departamento;
     private final String ubicacion;
 
-
     private Direccion(
             String ciudad,
             String departamento,
@@ -29,34 +32,47 @@ public class Direccion {
             CadenaCaracter cadenaCaracter
     ) {
 
+        Boolean excepcionProducida = Boolean.FALSE;
+        List<String> listadoExcepciones = new <String>ArrayList();
+
         try {
 
             if (cadenaCaracter.cadenaNoVacia(ciudad)) {
-                throw new StringNoVacio(CIUDAD_VACIA);
+                listadoExcepciones.add(CIUDAD_VACIA);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(ciudad)) {
-                throw new ValorRequerido(CIUDAD_NULA);
+                listadoExcepciones.add(CIUDAD_NULA);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(departamento)) {
-                throw new StringNoVacio(DEPARTAMENTO_VACIO);
+                listadoExcepciones.add(DEPARTAMENTO_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(departamento)) {
-                throw new ValorRequerido(DEPARTAMENTO_NULO);
+                listadoExcepciones.add(DEPARTAMENTO_NULO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoVacia(ubicacion)) {
-                throw new StringNoVacio(UBICACION_VACIA);
+                listadoExcepciones.add(UBICACION_VACIA);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(ubicacion)) {
-                throw new ValorRequerido(UBICACION_NULA);
+                listadoExcepciones.add(UBICACION_NULA);
+                excepcionProducida = Boolean.TRUE;
             }
 
         } catch (Exception e) {
-            throw new ValorRequerido(OBLIGATORIO_GENERICO);
+            listadoExcepciones.add(CADENA_CARACTER_NULO);
+        }
+
+        if (excepcionProducida) {
+            throw new ListadoExceptiones(listadoExcepciones);
         }
 
         this.ciudad = ciudad;
