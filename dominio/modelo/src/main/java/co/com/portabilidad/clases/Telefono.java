@@ -1,6 +1,7 @@
 package co.com.portabilidad.clases;
 
 
+import co.com.portabilidad.excepciones.ListadoExceptiones;
 import co.com.portabilidad.excepciones.NumeroNegativo;
 import co.com.portabilidad.excepciones.StringNoVacio;
 import co.com.portabilidad.excepciones.ValorRequerido;
@@ -9,6 +10,8 @@ import co.com.portabilidad.validaciones.Numero;
 import lombok.Builder;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Telefono {
 
@@ -16,7 +19,8 @@ public class Telefono {
     private static final String INDICATIVO_VACIO = "El indicativo no puede ser vacio";
     private static final String NUMERO_NULL = "El numero no puede ser nulo";
     private static final String NUMERO_NEGATIVO = "El numero no puede ser negativo o cero";
-    private static final String OBLIGATORIO_GENERICO = "Se deben suministrar las instancias de todos los validadores";
+    private static final String CADENA_CARACTER_NULO = "La cadena caracter no puede ser nula";
+    private static final String VALIDADOR_NUMERO_NULO = "El validador numero no puede ser nulo";
 
     private final String indicativo;
     private final BigInteger numero;
@@ -28,27 +32,44 @@ public class Telefono {
             CadenaCaracter cadenaCaracter,
             Numero validadorNumero
     ) {
-        try {
+        Boolean excepcionProducida = Boolean.FALSE;
+        List<String> listadoExcepciones = new <String>ArrayList();
 
+        try {
             if (cadenaCaracter.cadenaNoVacia(indicativo)) {
-                throw new StringNoVacio(INDICATIVO_VACIO);
+                listadoExcepciones.add(INDICATIVO_VACIO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (cadenaCaracter.cadenaNoNula(indicativo)) {
-                throw new ValorRequerido(INDICATIVO_NULL);
+                listadoExcepciones.add(INDICATIVO_NULL);
+                excepcionProducida = Boolean.TRUE;
             }
 
+        } catch (Exception e) {
+            listadoExcepciones.add(CADENA_CARACTER_NULO);
+            excepcionProducida = Boolean.TRUE;
+
+        }
+
+        try {
             if (validadorNumero.numeroNoNegativo(numero)) {
-                throw new NumeroNegativo(NUMERO_NEGATIVO);
+                listadoExcepciones.add(NUMERO_NEGATIVO);
+                excepcionProducida = Boolean.TRUE;
             }
 
             if (validadorNumero.numeroNoNulo(numero)) {
-                throw new ValorRequerido(NUMERO_NULL);
+                listadoExcepciones.add(NUMERO_NULL);
+                excepcionProducida = Boolean.TRUE;
             }
 
-
         } catch (Exception e) {
-            throw new ValorRequerido(OBLIGATORIO_GENERICO);
+            listadoExcepciones.add(VALIDADOR_NUMERO_NULO);
+            excepcionProducida = Boolean.TRUE;
+        }
+
+        if (excepcionProducida) {
+            throw new ListadoExceptiones(listadoExcepciones);
         }
 
         this.indicativo = indicativo;
