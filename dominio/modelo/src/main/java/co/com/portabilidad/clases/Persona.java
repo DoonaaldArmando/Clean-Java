@@ -32,92 +32,13 @@ public class Persona {
             Lista validadorLista
     ) {
 
-        Boolean excepcionProducida = Boolean.FALSE;
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        try {
+        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter);
+        this.validarListas(listadoExcepciones, validadorLista);
+        this.validarNumeros(listadoExcepciones, validadorNumero);
 
-            if (cadenaCaracter.cadenaNoVacia(nombre)) {
-                listadoExcepciones.add(MensajesPersona.NOMBRE_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(nombre)) {
-                listadoExcepciones.add(MensajesPersona.NOMBRE_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoVacia(apellido)) {
-                listadoExcepciones.add(MensajesPersona.APELLIDO_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(apellido)) {
-                listadoExcepciones.add(MensajesPersona.APELLIDO_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoVacia(tipoCedula)) {
-                listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(tipoCedula)) {
-                listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesPersona.CADENA_CARACTER_NULO);
-            excepcionProducida = Boolean.TRUE;
-        }
-
-        try {
-
-            if (validadorNumero.numeroNoNegativo(numeroCedula)) {
-                listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NEGATIVO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (validadorNumero.numeroNoNulo(numeroCedula)) {
-                listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesPersona.VALIDADOR_NUMERO_NULO);
-            excepcionProducida = Boolean.TRUE;
-        }
-
-
-        try {
-
-            if (validadorLista.listaNoVacia(telefonos)) {
-                listadoExcepciones.add(MensajesPersona.TELEFONO_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (validadorLista.listaNoNula(telefonos)) {
-                listadoExcepciones.add(MensajesPersona.TELEFONO_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (validadorLista.listaNoVacia(direcciones)) {
-                listadoExcepciones.add(MensajesPersona.DIRECCION_VACIA);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (validadorLista.listaNoNula(direcciones)) {
-                listadoExcepciones.add(MensajesPersona.DIRECCION_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesPersona.VALIDADOR_LISTA_NULO);
-            excepcionProducida = Boolean.TRUE;
-        }
-
-        if (excepcionProducida) {
+        if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
         }
 
@@ -127,6 +48,87 @@ public class Persona {
         this.tipoCedula = tipoCedula;
         this.telefonos = telefonos;
         this.direcciones = direcciones;
+    }
+
+    private void validarCadenaCaracteres(
+            List<String> listadoExcepciones,
+            CadenaCaracter cadenaCaracter
+    ) {
+        try {
+
+            if (cadenaCaracter.cadenaNoVacia(nombre)) {
+                listadoExcepciones.add(MensajesPersona.NOMBRE_VACIO);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(nombre)) {
+                listadoExcepciones.add(MensajesPersona.NOMBRE_NULO);
+            }
+
+            if (cadenaCaracter.cadenaNoVacia(apellido)) {
+                listadoExcepciones.add(MensajesPersona.APELLIDO_VACIO);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(apellido)) {
+                listadoExcepciones.add(MensajesPersona.APELLIDO_NULO);
+            }
+
+            if (cadenaCaracter.cadenaNoVacia(tipoCedula)) {
+                listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_VACIO);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(tipoCedula)) {
+                listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_NULO);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesPersona.CADENA_CARACTER_NULO);
+        }
+    }
+
+    private void validarNumeros(
+            List<String> listadoExcepciones,
+            Numero validadorNumero
+    ) {
+        try {
+
+            if (validadorNumero.numeroNoNegativo(numeroCedula)) {
+                listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NEGATIVO);
+            }
+
+            if (validadorNumero.numeroNoNulo(numeroCedula)) {
+                listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NULO);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesPersona.VALIDADOR_NUMERO_NULO);
+        }
+    }
+
+    private void validarListas(
+            List<String> listadoExcepciones,
+            Lista validadorLista
+    ) {
+        try {
+
+            if (validadorLista.listaNoVacia(telefonos)) {
+                listadoExcepciones.add(MensajesPersona.TELEFONO_VACIO);
+            }
+
+            if (validadorLista.listaNoNula(telefonos)) {
+                listadoExcepciones.add(MensajesPersona.TELEFONO_NULO);
+            }
+
+            if (validadorLista.listaNoVacia(direcciones)) {
+                listadoExcepciones.add(MensajesPersona.DIRECCION_VACIA);
+            }
+
+            if (validadorLista.listaNoNula(direcciones)) {
+                listadoExcepciones.add(MensajesPersona.DIRECCION_NULO);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesPersona.VALIDADOR_LISTA_NULO);
+        }
     }
 
     public static PersonaBuilder builder() {

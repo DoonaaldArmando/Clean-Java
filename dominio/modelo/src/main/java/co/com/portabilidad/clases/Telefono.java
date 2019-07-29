@@ -21,49 +21,55 @@ public class Telefono {
             CadenaCaracter cadenaCaracter,
             Numero validadorNumero
     ) {
-        Boolean excepcionProducida = Boolean.FALSE;
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        try {
-            if (cadenaCaracter.cadenaNoVacia(indicativo)) {
-                listadoExcepciones.add(MensajesTelefono.INDICATIVO_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
+        this.validarCadenasCaracteres(listadoExcepciones, cadenaCaracter);
+        this.validarNumeros(listadoExcepciones, validadorNumero);
 
-            if (cadenaCaracter.cadenaNoNula(indicativo)) {
-                listadoExcepciones.add(MensajesTelefono.INDICATIVO_NULL);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesTelefono.CADENA_CARACTER_NULO);
-            excepcionProducida = Boolean.TRUE;
-
-        }
-
-        try {
-            if (validadorNumero.numeroNoNegativo(numero)) {
-                listadoExcepciones.add(MensajesTelefono.NUMERO_NEGATIVO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (validadorNumero.numeroNoNulo(numero)) {
-                listadoExcepciones.add(MensajesTelefono.NUMERO_NULL);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesTelefono.VALIDADOR_NUMERO_NULO);
-            excepcionProducida = Boolean.TRUE;
-        }
-
-        if (excepcionProducida) {
+        if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
         }
 
         this.indicativo = indicativo;
         this.numero = numero;
     }
+
+    private void validarCadenasCaracteres(
+            List<String> listadoExcepciones,
+            CadenaCaracter cadenaCaracter
+    ) {
+        try {
+            if (cadenaCaracter.cadenaNoVacia(indicativo)) {
+                listadoExcepciones.add(MensajesTelefono.INDICATIVO_VACIO);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(indicativo)) {
+                listadoExcepciones.add(MensajesTelefono.INDICATIVO_NULL);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesTelefono.CADENA_CARACTER_NULO);
+        }
+    }
+
+    private void validarNumeros(
+            List<String> listadoExcepciones,
+            Numero validadorNumero
+    ) {
+        try {
+            if (validadorNumero.numeroNoNegativo(numero)) {
+                listadoExcepciones.add(MensajesTelefono.NUMERO_NEGATIVO);
+            }
+
+            if (validadorNumero.numeroNoNulo(numero)) {
+                listadoExcepciones.add(MensajesTelefono.NUMERO_NULL);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesTelefono.VALIDADOR_NUMERO_NULO);
+        }
+    }
+
 
     public static TelefonoBuilder builder() {
         return new TelefonoBuilder();

@@ -24,52 +24,53 @@ public class Direccion {
             CadenaCaracter cadenaCaracter
     ) {
 
-        Boolean excepcionProducida = Boolean.FALSE;
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        try {
+        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter);
 
-            if (cadenaCaracter.cadenaNoVacia(ciudad)) {
-                listadoExcepciones.add(MensajesDireccion.CIUDAD_VACIA);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(ciudad)) {
-                listadoExcepciones.add(MensajesDireccion.CIUDAD_NULA);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoVacia(departamento)) {
-                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_VACIO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(departamento)) {
-                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_NULO);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoVacia(ubicacion)) {
-                listadoExcepciones.add(MensajesDireccion.UBICACION_VACIA);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-            if (cadenaCaracter.cadenaNoNula(ubicacion)) {
-                listadoExcepciones.add(MensajesDireccion.UBICACION_NULA);
-                excepcionProducida = Boolean.TRUE;
-            }
-
-        } catch (Exception e) {
-            listadoExcepciones.add(MensajesDireccion.CADENA_CARACTER_NULO);
-        }
-
-        if (excepcionProducida) {
+        if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
         }
 
         this.ciudad = ciudad;
         this.departamento = departamento;
         this.ubicacion = ubicacion;
+    }
+
+
+    private void validarCadenaCaracteres(
+            List<String> listadoExcepciones,
+            CadenaCaracter cadenaCaracter
+    ) {
+        try {
+
+            if (cadenaCaracter.cadenaNoVacia(ciudad)) {
+                listadoExcepciones.add(MensajesDireccion.CIUDAD_VACIA);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(ciudad)) {
+                listadoExcepciones.add(MensajesDireccion.CIUDAD_NULA);
+            }
+
+            if (cadenaCaracter.cadenaNoVacia(departamento)) {
+                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_VACIO);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(departamento)) {
+                listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_NULO);
+            }
+
+            if (cadenaCaracter.cadenaNoVacia(ubicacion)) {
+                listadoExcepciones.add(MensajesDireccion.UBICACION_VACIA);
+            }
+
+            if (cadenaCaracter.cadenaNoNula(ubicacion)) {
+                listadoExcepciones.add(MensajesDireccion.UBICACION_NULA);
+            }
+
+        } catch (Exception e) {
+            listadoExcepciones.add(MensajesDireccion.CADENA_CARACTER_NULO);
+        }
     }
 
     public static DireccionBuilder builder() {
