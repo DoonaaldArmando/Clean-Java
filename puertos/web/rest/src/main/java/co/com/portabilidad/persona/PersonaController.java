@@ -8,6 +8,7 @@ import co.com.portabilidad.clases.Persona;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/personas")
 @AllArgsConstructor
+@Repository
 public class PersonaController {
 
     private CrearPersona crearPersona;
