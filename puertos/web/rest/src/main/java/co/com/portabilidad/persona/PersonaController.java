@@ -3,13 +3,14 @@ package co.com.portabilidad.persona;
 
 import co.com.portabilidad.DTO.PersonaDTO;
 import co.com.portabilidad.acciones.persona.crear.CrearPersona;
-import co.com.portabilidad.acciones.persona.listar.ListarPersona;
+import co.com.portabilidad.acciones.persona.lista.ListarPersona;
 import co.com.portabilidad.clases.Persona;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
@@ -19,11 +20,11 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonaController {
 
-    private CrearPersona crearPersona;
-    private ListarPersona listarPersona;
+    private final CrearPersona crearPersona;
+    private final ListarPersona listarPersona;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Persona> crearPersona(@RequestBody PersonaDTO persona) {
+    public ResponseEntity<Persona> crearPersona(@Valid @RequestBody PersonaDTO persona) {
         return ResponseEntity
                 .created(
                         URI.create(

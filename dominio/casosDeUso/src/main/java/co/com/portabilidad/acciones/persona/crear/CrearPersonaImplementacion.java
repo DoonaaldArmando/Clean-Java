@@ -33,16 +33,16 @@ public class CrearPersonaImplementacion implements CrearPersona {
             List<Direccion> direcciones
     ) {
         if (this.existenciaPersona.existenciaPersona(tipoCedula, numeroCedula)) {
-            return this.crear(
-                    nombre,
-                    apellido,
-                    numeroCedula,
-                    tipoCedula,
-                    telefonos,
-                    direcciones);
+            throw new ExistenciaPrevia(EXISTENCIA_PREVIA_PERSONA);
         }
+        return this.crear(
+                nombre,
+                apellido,
+                numeroCedula,
+                tipoCedula,
+                telefonos,
+                direcciones);
 
-        throw new ExistenciaPrevia(EXISTENCIA_PREVIA_PERSONA);
     }
 
     private Persona crear(

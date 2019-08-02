@@ -1,3 +1,5 @@
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile project(':puertos:baseDeDatos:mongodb')
+    compile project(':puertos:baseDeDatos:H2')
 }

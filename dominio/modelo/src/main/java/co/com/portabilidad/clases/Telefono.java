@@ -23,8 +23,8 @@ public class Telefono {
     ) {
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        this.validarCadenasCaracteres(listadoExcepciones, cadenaCaracter);
-        this.validarNumeros(listadoExcepciones, validadorNumero);
+        this.validarCadenasCaracteres(listadoExcepciones, cadenaCaracter,indicativo);
+        this.validarNumeros(listadoExcepciones, validadorNumero,numero);
 
         if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
@@ -36,14 +36,15 @@ public class Telefono {
 
     private void validarCadenasCaracteres(
             List<String> listadoExcepciones,
-            CadenaCaracter cadenaCaracter
+            CadenaCaracter cadenaCaracter,
+            String indicativo
     ) {
         try {
-            if (cadenaCaracter.cadenaNoVacia(indicativo)) {
+            if (cadenaCaracter.cadenaVacia(indicativo)) {
                 listadoExcepciones.add(MensajesTelefono.INDICATIVO_VACIO);
             }
 
-            if (cadenaCaracter.cadenaNoNula(indicativo)) {
+            if (cadenaCaracter.cadenaNula(indicativo)) {
                 listadoExcepciones.add(MensajesTelefono.INDICATIVO_NULL);
             }
 
@@ -54,7 +55,8 @@ public class Telefono {
 
     private void validarNumeros(
             List<String> listadoExcepciones,
-            Numero validadorNumero
+            Numero validadorNumero,
+            BigInteger numero
     ) {
         try {
             if (validadorNumero.numeroNoNegativo(numero)) {

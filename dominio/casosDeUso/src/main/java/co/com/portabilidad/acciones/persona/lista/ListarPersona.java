@@ -1,4 +1,4 @@
-package co.com.portabilidad.acciones.persona.listar;
+package co.com.portabilidad.acciones.persona.lista;
 
 import co.com.portabilidad.clases.Persona;
 

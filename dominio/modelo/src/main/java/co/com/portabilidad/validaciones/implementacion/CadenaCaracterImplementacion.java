@@ -7,22 +7,26 @@ import java.util.Objects;
 public final class CadenaCaracterImplementacion implements CadenaCaracter {
 
     @Override
-    public Boolean cadenaNoVacia(String cadena) {
+    public Boolean cadenaVacia(String cadena) {
 
-        if (cadena.isEmpty()) {
-            return Boolean.FALSE;
+        if(!this.cadenaNula(cadena)){
+            return Boolean.TRUE;
         }
 
-        return Boolean.TRUE;
+        if (cadena.isEmpty()) {
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
     }
 
     @Override
-    public Boolean cadenaNoNula(String cadena) {
+    public Boolean cadenaNula(String cadena) {
 
         if (Objects.isNull(cadena)) {
-            return Boolean.FALSE;
+            return Boolean.TRUE;
         }
 
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 }
