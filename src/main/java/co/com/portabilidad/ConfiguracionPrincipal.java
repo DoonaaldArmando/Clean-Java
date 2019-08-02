@@ -3,12 +3,14 @@ package co.com.portabilidad;
 
 import co.com.portabilidad.acciones.persona.ExistenciaPersona;
 import co.com.portabilidad.acciones.persona.GuardarPersona;
+import co.com.portabilidad.acciones.persona.ListaPersona;
 import co.com.portabilidad.acciones.persona.crear.CrearPersona;
+import co.com.portabilidad.acciones.persona.lista.ListarPersona;
 import co.com.portabilidad.acciones.persona.crear.CrearPersonaImplementacion;
-import co.com.portabilidad.acciones.persona.listar.ListarPersonaImplementacion;
+import co.com.portabilidad.acciones.persona.lista.ListarPersonaImplementacion;
 import co.com.portabilidad.fabricas.PersonaFabrica;
 import co.com.portabilidad.implementacion.persona.CrearPersonaData;
-import co.com.portabilidad.implementacion.persona.ListarPersonaData;
+import co.com.portabilidad.implementacion.persona.ListaPersonaData;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import co.com.portabilidad.validaciones.Lista;
 import co.com.portabilidad.validaciones.Numero;
@@ -23,17 +25,17 @@ public class ConfiguracionPrincipal {
 
 
     @Bean
-    public CadenaCaracterImplementacion cadenaCaracter() {
+    public CadenaCaracter cadenaCaracter() {
         return new CadenaCaracterImplementacion();
     }
 
     @Bean
-    public ListaImplementacion lista() {
+    public Lista lista() {
         return new ListaImplementacion();
     }
 
     @Bean
-    public NumeroImplementacion numero() {
+    public Numero numero() {
         return new NumeroImplementacion();
     }
 
@@ -48,25 +50,16 @@ public class ConfiguracionPrincipal {
     }
 
     @Bean
-    public CrearPersona crearPersona(PersonaFabrica personaFabrica,
-                                     GuardarPersona guardarPersona,
-                                     ExistenciaPersona existenciaPersona) {
+    public CrearPersona crearPersona(
+            PersonaFabrica personaFabrica,
+            GuardarPersona guardarPersona,
+            ExistenciaPersona existenciaPersona) {
         return new CrearPersonaImplementacion(
                 personaFabrica,
                 guardarPersona,
                 existenciaPersona);
     }
 
-
-    @Bean
-    public CrearPersonaData crearPersonaData() {
-        return new CrearPersonaData();
-    }
-
-    @Bean
-    public ListarPersonaData listarPersonaData() {
-        return new ListarPersonaData();
-    }
 
     @Bean
     public CrearPersonaImplementacion crearPersonaImplementacion(
@@ -79,9 +72,14 @@ public class ConfiguracionPrincipal {
 
     @Bean
     public ListarPersonaImplementacion listarPersonaImplementacion(
-            co.com.portabilidad.acciones.persona.ListarPersona listarPersona
+            ListaPersona listaPersona
     ) {
-        return new ListarPersonaImplementacion(listarPersona);
+        return new ListarPersonaImplementacion(listaPersona);
+    }
+
+    @Bean
+    public ListarPersona listarPersona(ListaPersona listaPersona) {
+        return new ListarPersonaImplementacion(listaPersona);
     }
 
 }

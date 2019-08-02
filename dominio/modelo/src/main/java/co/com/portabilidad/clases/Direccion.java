@@ -26,7 +26,7 @@ public class Direccion {
 
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter);
+        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter, ciudad, departamento, ubicacion);
 
         if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
@@ -40,31 +40,34 @@ public class Direccion {
 
     private void validarCadenaCaracteres(
             List<String> listadoExcepciones,
-            CadenaCaracter cadenaCaracter
+            CadenaCaracter cadenaCaracter,
+            String ciudad,
+            String departamento,
+            String ubicacion
     ) {
         try {
 
-            if (cadenaCaracter.cadenaNoVacia(ciudad)) {
+            if (cadenaCaracter.cadenaVacia(ciudad)) {
                 listadoExcepciones.add(MensajesDireccion.CIUDAD_VACIA);
             }
 
-            if (cadenaCaracter.cadenaNoNula(ciudad)) {
+            if (cadenaCaracter.cadenaNula(ciudad)) {
                 listadoExcepciones.add(MensajesDireccion.CIUDAD_NULA);
             }
 
-            if (cadenaCaracter.cadenaNoVacia(departamento)) {
+            if (cadenaCaracter.cadenaVacia(departamento)) {
                 listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_VACIO);
             }
 
-            if (cadenaCaracter.cadenaNoNula(departamento)) {
+            if (cadenaCaracter.cadenaNula(departamento)) {
                 listadoExcepciones.add(MensajesDireccion.DEPARTAMENTO_NULO);
             }
 
-            if (cadenaCaracter.cadenaNoVacia(ubicacion)) {
+            if (cadenaCaracter.cadenaVacia(ubicacion)) {
                 listadoExcepciones.add(MensajesDireccion.UBICACION_VACIA);
             }
 
-            if (cadenaCaracter.cadenaNoNula(ubicacion)) {
+            if (cadenaCaracter.cadenaNula(ubicacion)) {
                 listadoExcepciones.add(MensajesDireccion.UBICACION_NULA);
             }
 

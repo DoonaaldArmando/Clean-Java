@@ -10,6 +10,10 @@ public final class ListaImplementacion implements Lista {
     @Override
     public Boolean listaNoVacia(List lista) {
 
+        if (!this.listaNoNula(lista)) {
+            return Boolean.FALSE;
+        }
+
         if (lista.isEmpty()) {
             return Boolean.FALSE;
         }

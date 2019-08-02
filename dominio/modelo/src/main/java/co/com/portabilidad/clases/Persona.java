@@ -34,9 +34,9 @@ public class Persona {
 
         List<String> listadoExcepciones = new <String>ArrayList();
 
-        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter);
-        this.validarListas(listadoExcepciones, validadorLista);
-        this.validarNumeros(listadoExcepciones, validadorNumero);
+        this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter, nombre, apellido, tipoCedula);
+        this.validarListas(listadoExcepciones, validadorLista, telefonos, direcciones);
+        this.validarNumeros(listadoExcepciones, validadorNumero, numeroCedula);
 
         if (!listadoExcepciones.isEmpty()) {
             throw new ListadoExceptiones(listadoExcepciones);
@@ -52,31 +52,34 @@ public class Persona {
 
     private void validarCadenaCaracteres(
             List<String> listadoExcepciones,
-            CadenaCaracter cadenaCaracter
+            CadenaCaracter cadenaCaracter,
+            String nombre,
+            String apellido,
+            String tipoCedula
     ) {
         try {
 
-            if (cadenaCaracter.cadenaNoVacia(nombre)) {
+            if (cadenaCaracter.cadenaVacia(nombre)) {
                 listadoExcepciones.add(MensajesPersona.NOMBRE_VACIO);
             }
 
-            if (cadenaCaracter.cadenaNoNula(nombre)) {
+            if (cadenaCaracter.cadenaNula(nombre)) {
                 listadoExcepciones.add(MensajesPersona.NOMBRE_NULO);
             }
 
-            if (cadenaCaracter.cadenaNoVacia(apellido)) {
+            if (cadenaCaracter.cadenaVacia(apellido)) {
                 listadoExcepciones.add(MensajesPersona.APELLIDO_VACIO);
             }
 
-            if (cadenaCaracter.cadenaNoNula(apellido)) {
+            if (cadenaCaracter.cadenaNula(apellido)) {
                 listadoExcepciones.add(MensajesPersona.APELLIDO_NULO);
             }
 
-            if (cadenaCaracter.cadenaNoVacia(tipoCedula)) {
+            if (cadenaCaracter.cadenaVacia(tipoCedula)) {
                 listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_VACIO);
             }
 
-            if (cadenaCaracter.cadenaNoNula(tipoCedula)) {
+            if (cadenaCaracter.cadenaNula(tipoCedula)) {
                 listadoExcepciones.add(MensajesPersona.TIPO_CEDULA_NULO);
             }
 
@@ -87,7 +90,8 @@ public class Persona {
 
     private void validarNumeros(
             List<String> listadoExcepciones,
-            Numero validadorNumero
+            Numero validadorNumero,
+            BigInteger numeroCedula
     ) {
         try {
 
@@ -106,7 +110,9 @@ public class Persona {
 
     private void validarListas(
             List<String> listadoExcepciones,
-            Lista validadorLista
+            Lista validadorLista,
+            List<Telefono> telefonos,
+            List<Direccion> direcciones
     ) {
         try {
 

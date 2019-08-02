@@ -20,8 +20,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.6.RELEASE'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
 
     compile project(':dominio')
     compile project(':dominio:modelo')

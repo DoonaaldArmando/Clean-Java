@@ -1,6 +1,7 @@
-package co.com.portabilidad.acciones.persona.listar;
+package co.com.portabilidad.acciones.persona.lista;
 
 
+import co.com.portabilidad.acciones.persona.ListaPersona;
 import co.com.portabilidad.clases.Persona;
 import lombok.AllArgsConstructor;
 
@@ -10,16 +11,16 @@ import java.util.List;
 @AllArgsConstructor
 public class ListarPersonaImplementacion implements ListarPersona {
 
-    private final co.com.portabilidad.acciones.persona.ListarPersona listarPersona;
+    private final ListaPersona listaPersona;
 
     @Override
     public List<Persona> listarTodos() {
-        return listarPersona.listarTodos();
+        return listaPersona.listarTodos();
     }
 
     @Override
     public Persona listarPorNumeroCedulaYTipoCedula(String tipoCedula, BigInteger numeroCedula) {
-        return listarPersona.listarPorNumeroCedulaYTipoDocumento(tipoCedula, numeroCedula);
+        return listaPersona.listarPorNumeroCedulaYTipoDocumento(tipoCedula, numeroCedula);
     }
 }
 

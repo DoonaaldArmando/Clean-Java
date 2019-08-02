@@ -1,6 +1,8 @@
 dependencies {
     compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.8.RELEASE'
-
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     compile project(':dominio:casosDeUso')
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0.2'
+
 
 }
