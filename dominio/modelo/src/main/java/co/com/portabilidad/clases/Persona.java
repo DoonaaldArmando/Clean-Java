@@ -5,12 +5,14 @@ import co.com.portabilidad.validaciones.CadenaCaracter;
 import co.com.portabilidad.excepciones.mensajes.MensajesPersona;
 import co.com.portabilidad.validaciones.Lista;
 import co.com.portabilidad.validaciones.Numero;
+import lombok.Getter;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Getter
 public class Persona {
 
     private final String nombre;

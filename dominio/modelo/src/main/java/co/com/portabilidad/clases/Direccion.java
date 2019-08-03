@@ -5,11 +5,12 @@ import co.com.portabilidad.excepciones.ListadoExceptiones;
 import co.com.portabilidad.excepciones.mensajes.MensajesDireccion;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder(toBuilder = true)
+@Getter
 public class Direccion {
 
 

@@ -5,11 +5,13 @@ import co.com.portabilidad.excepciones.ListadoExceptiones;
 import co.com.portabilidad.excepciones.mensajes.MensajesTelefono;
 import co.com.portabilidad.validaciones.CadenaCaracter;
 import co.com.portabilidad.validaciones.Numero;
+import lombok.Getter;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Telefono {
 
     private final String indicativo;
