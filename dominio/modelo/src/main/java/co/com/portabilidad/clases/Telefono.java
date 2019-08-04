@@ -61,11 +61,11 @@ public class Telefono {
             BigInteger numero
     ) {
         try {
-            if (validadorNumero.numeroNoNegativo(numero)) {
+            if (validadorNumero.numeroNegativo(numero)) {
                 listadoExcepciones.add(MensajesTelefono.NUMERO_NEGATIVO);
             }
 
-            if (validadorNumero.numeroNoNulo(numero)) {
+            if (validadorNumero.numeroNulo(numero)) {
                 listadoExcepciones.add(MensajesTelefono.NUMERO_NULL);
             }
 

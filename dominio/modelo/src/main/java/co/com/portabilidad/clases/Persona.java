@@ -97,11 +97,11 @@ public class Persona {
     ) {
         try {
 
-            if (validadorNumero.numeroNoNegativo(numeroCedula)) {
+            if (validadorNumero.numeroNegativo(numeroCedula)) {
                 listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NEGATIVO);
             }
 
-            if (validadorNumero.numeroNoNulo(numeroCedula)) {
+            if (validadorNumero.numeroNulo(numeroCedula)) {
                 listadoExcepciones.add(MensajesPersona.NUMERO_CEDULA_NULO);
             }
 
@@ -118,19 +118,19 @@ public class Persona {
     ) {
         try {
 
-            if (validadorLista.listaNoVacia(telefonos)) {
+            if (validadorLista.listaVacia(telefonos)) {
                 listadoExcepciones.add(MensajesPersona.TELEFONO_VACIO);
             }
 
-            if (validadorLista.listaNoNula(telefonos)) {
+            if (validadorLista.listaNula(telefonos)) {
                 listadoExcepciones.add(MensajesPersona.TELEFONO_NULO);
             }
 
-            if (validadorLista.listaNoVacia(direcciones)) {
+            if (validadorLista.listaVacia(direcciones)) {
                 listadoExcepciones.add(MensajesPersona.DIRECCION_VACIA);
             }
 
-            if (validadorLista.listaNoNula(direcciones)) {
+            if (validadorLista.listaNula(direcciones)) {
                 listadoExcepciones.add(MensajesPersona.DIRECCION_NULO);
             }
 

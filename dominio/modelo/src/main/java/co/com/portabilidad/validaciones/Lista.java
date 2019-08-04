@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface Lista {
 
-    Boolean listaNoVacia(List lista);
+    Boolean listaVacia(List lista);
 
-    Boolean listaNoNula(List lista);
+    Boolean listaNula(List lista);
 
 }

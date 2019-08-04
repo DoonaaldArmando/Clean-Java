@@ -9,18 +9,18 @@ import java.util.Objects;
 public final class NumeroImplementacion implements Numero {
 
     @Override
-    public Boolean numeroNoNegativo(BigInteger numero) {
+    public Boolean numeroNegativo(BigInteger numero) {
         if (numero.signum() == -1 || numero.equals(BigInteger.ZERO)) {
-            return Boolean.FALSE;
+            return Boolean.TRUE;
         }
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 
     @Override
-    public Boolean numeroNoNulo(BigInteger numero) {
+    public Boolean numeroNulo(BigInteger numero) {
         if (Objects.isNull(numero)) {
-            return Boolean.FALSE;
+            return Boolean.TRUE;
         }
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 }

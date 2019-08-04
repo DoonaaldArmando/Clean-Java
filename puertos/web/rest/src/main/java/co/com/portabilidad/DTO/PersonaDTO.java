@@ -1,7 +1,5 @@
 package co.com.portabilidad.DTO;
 
-import co.com.portabilidad.clases.Direccion;
-import co.com.portabilidad.clases.Telefono;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -13,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 public class PersonaDTO {
 
@@ -26,8 +25,8 @@ public class PersonaDTO {
     @NotNull(message = "Tipo de cedula Requerido")
     private String tipoCedula;
 
-    private List<Telefono> telefonos;
+    private List<TelefonoDTO> telefonos;
 
-    private List<Direccion> direcciones;
+    private List<DireccionDTO> direcciones;
 
 }
