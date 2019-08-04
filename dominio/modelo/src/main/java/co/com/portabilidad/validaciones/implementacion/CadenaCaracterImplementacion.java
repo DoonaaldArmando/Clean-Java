@@ -9,7 +9,7 @@ public final class CadenaCaracterImplementacion implements CadenaCaracter {
     @Override
     public Boolean cadenaVacia(String cadena) {
 
-        if(!this.cadenaNula(cadena)){
+        if(this.cadenaNula(cadena)){
             return Boolean.TRUE;
         }
 

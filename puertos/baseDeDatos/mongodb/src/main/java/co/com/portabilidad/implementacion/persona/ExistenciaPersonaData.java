@@ -15,12 +15,12 @@ public class ExistenciaPersonaData implements ExistenciaPersona {
     private final MongoOperations mongoOperations;
 
     @Override
-    public Boolean existenciaPersona(String tipoDocumento, BigInteger numeroCedula) {
+    public Boolean existenciaPersona(String tipoCedula, BigInteger numeroCedula) {
         Query query = Query
                 .query(
                         Criteria
-                                .where("tipoDocumento")
-                                .is(tipoDocumento)
+                                .where("tipoCedula")
+                                .is(tipoCedula)
                                 .and("numeroCedula")
                                 .is(numeroCedula)
                 );

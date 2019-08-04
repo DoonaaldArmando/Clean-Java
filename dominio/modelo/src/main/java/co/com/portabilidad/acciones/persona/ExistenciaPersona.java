@@ -4,6 +4,6 @@ import java.math.BigInteger;
 
 public interface ExistenciaPersona {
 
-    Boolean existenciaPersona(String tipoDocumento, BigInteger numeroCedula);
+    Boolean existenciaPersona(String tipoCedula, BigInteger numeroCedula);
 
 }

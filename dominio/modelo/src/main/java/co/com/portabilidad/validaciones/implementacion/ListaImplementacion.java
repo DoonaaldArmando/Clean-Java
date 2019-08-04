@@ -8,26 +8,26 @@ import java.util.Objects;
 public final class ListaImplementacion implements Lista {
 
     @Override
-    public Boolean listaNoVacia(List lista) {
+    public Boolean listaVacia(List lista) {
 
-        if (!this.listaNoNula(lista)) {
-            return Boolean.FALSE;
+        if (this.listaNula(lista)) {
+            return Boolean.TRUE;
         }
 
         if (lista.isEmpty()) {
-            return Boolean.FALSE;
+            return Boolean.TRUE;
         }
 
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 
     @Override
-    public Boolean listaNoNula(List lista) {
+    public Boolean listaNula(List lista) {
 
         if (Objects.isNull(lista)) {
-            return Boolean.FALSE;
+            return Boolean.TRUE;
         }
 
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 }
