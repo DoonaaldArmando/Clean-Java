@@ -4,7 +4,6 @@ package co.com.portabilidad.clases;
 import co.com.portabilidad.excepciones.ListadoExceptiones;
 import co.com.portabilidad.excepciones.mensajes.MensajesDireccion;
 import co.com.portabilidad.validaciones.CadenaCaracter;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class Direccion {
             CadenaCaracter cadenaCaracter
     ) {
 
-        List<String> listadoExcepciones = new <String>ArrayList();
+        ArrayList<String> listadoExcepciones = new <String>ArrayList<String>();
 
         this.validarCadenaCaracteres(listadoExcepciones, cadenaCaracter, ciudad, departamento, ubicacion);
 
